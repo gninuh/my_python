@@ -1,0 +1,3 @@
+[db]
+connectionstr = mysql+mysqlconnector://pyuser@localhost:3306/my_python?charset=utf8
+echo = True
