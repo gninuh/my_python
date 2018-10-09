@@ -13,7 +13,7 @@ def init_config():
     cf = configparser.ConfigParser()
     cf.read(os.path.abspath(os.path.join(os.getcwd(), 'config', 'config.ini')))
     connection_string = cf.get('db', 'connectionstr')
-    connection_echo = cf.get('db', 'echo')
+    connection_echo = cf.getboolean('db', 'echo')
 
 
 class IdentyfyType(object):
@@ -25,6 +25,6 @@ class IdentyfyType(object):
 
 
 if __name__ == '__main__':
-    init()
+    init_config()
     print('连接字符串是：%s' % connection_string)
     print('是否显示执行过程：%s' % str(connection_echo))

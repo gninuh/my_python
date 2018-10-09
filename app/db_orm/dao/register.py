@@ -1,6 +1,5 @@
-from db_factory import db_session
-from app.orm.model.user import User
-from app.orm.model.user_auth import UserAuth
+from db_orm import db_factory as df
+from db_orm.db_model import User, UserAuth
 
 
 def register(identity_type, identity, credential='', nickname='', avatar=''):
@@ -8,9 +7,9 @@ def register(identity_type, identity, credential='', nickname='', avatar=''):
     nickname = nickname or '小P同学'
 
     user = User(nickname=nickname, avatar=avatar)
-    userauth = UserAuth(identity_type=identity_type, identity=identity, credential=credential, user=user)
+    userauth = UserAuth(identity_type=identity_type, identifier=identity, credential=credential, user_info=user)
 
-    session = db_session()
+    session = df.db_session()
     session.add(user)
     session.add(userauth)
 

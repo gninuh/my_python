@@ -1,8 +1,5 @@
 import time
 import uuid
-from sqlalchemy.ext.declarative import declarative_base
-
-Base = declarative_base()  # 创建基类
 
 
 def next_id() -> str:  # 生成UDID做唯一标识
