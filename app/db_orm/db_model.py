@@ -13,7 +13,7 @@ class UserAuth(Base):
     id = Column(String(50), primary_key=True, default=next_id)
     user_id = Column(String(50), ForeignKey('user.id'))
     identity_type = Column(String(10), nullable=False)
-    identifier = Column(String(50),  primary_key=True)
+    identifier = Column(String(50),  nullable=False, unique=True, index=True)
     credential = Column(Text)
     create_time = Column(Float, default=time.time)
     last_update = Column(Float, onupdate=time.time)

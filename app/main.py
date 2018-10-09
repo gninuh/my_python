@@ -22,8 +22,8 @@ def init_database():
 
 if __name__ == '__main__':
 
-    print('连接字符串是：%s' % ac.connection_string)
-    print('是否显示执行过程：%s' % str(ac.connection_echo))
-    # init_database()
+    # print('连接字符串是：%s' % ac.connection_string)  # 在Mac的VS中报错，编码问题
+    # print('是否显示执行过程：%s' % str(ac.connection_echo))
+    # init_database()  # 如果遇到'mysql'错误，尝试安装驱动pip install mysql-connector-python-rf 
     # register(ac.IdentyfyType.ACCOUNT, 'usertwo')
     app.run(debug=False)

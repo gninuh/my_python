@@ -13,11 +13,11 @@ def register(identity_type, identity, credential='', nickname='', avatar=''):
         session = df.db_session()
         session.add(user)
         session.add(userauth)
+        session.commit()
     except Exception as ex:
         print(ex)
         return False
     finally:
-        session.commit()
         session.close()
     return True
 
