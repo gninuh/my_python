@@ -1,6 +1,6 @@
 # -*- coding:utf-8 -*-
 import app_config as ac
-from db_orm import db_factory as df
+from db_orm import db_factory as df  # 想要全局变量的修改全局有效，必须import模块，对模块内变量修改，使用时也需要引用模块，调用模块内变量
 from db_orm.dao.register import register
 
 
