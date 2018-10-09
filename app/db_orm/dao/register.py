@@ -9,9 +9,17 @@ def register(identity_type, identity, credential='', nickname='', avatar=''):
     user = User(nickname=nickname, avatar=avatar)
     userauth = UserAuth(identity_type=identity_type, identifier=identity, credential=credential, user_info=user)
 
-    session = df.db_session()
-    session.add(user)
-    session.add(userauth)
+    try:
+        session = df.db_session()
+        session.add(user)
+        session.add(userauth)
+    except Exception as ex:
+        print(ex)
+        return False
+    finally:
+        session.commit()
+        session.close()
+    return True
 
-    session.commit()
-    session.close()
+
+    
