@@ -13,6 +13,8 @@ app = Flask(__name__)
 api = Api(app)
 api.add_resource(mp.User, '/u/<string:identifier>', '/u/<string:identifier>/<string:identify_type>')
 api.add_resource(mp.Register, '/register')
+api.add_resource(mp.Login, '/login')
+api.add_resource(mp.Token, '/token')
 
 
 def init_database():

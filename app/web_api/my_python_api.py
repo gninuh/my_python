@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, redirect, url_for
 from flask_restful import Resource
 
 
@@ -55,3 +55,26 @@ class Register(Resource):
             return {"message": "注册成功"}, 200
         else:
             return to_json(None, 1)
+
+
+class Login(Resource):
+    def get(self):
+        from app_config import application_id, redirect_uri, response_type
+        # return redirect(url_for('http://192.168.0.2:3080/oauth/authorize', client_id=application_id, redirect_uri=redirect_uri, response_type=response_type)) 
+        return redirect('http://192.168.0.2:3080/oauth/authorize?client_id=9d5a3450aac19672a1c2c27b11934dbde1022d2013d3681b6c5b4ae6ceb087aa&redirect_uri=http://127.0.0.1:5000/token&response_type=code')
+
+
+class Token(Resource):
+    def get(self):
+        from app_config import application_id, secret, response_type
+        import requests
+        headers = {'Content-Type': 'multipart/form-data'}
+        code = request.args.get('code') or ''
+        payload = {"client_id": application_id, 'client_secret': secret, 'grant_type' : 'authorization_code', 'code' : code}
+        r = requests.post('http://192.168.0.2:3080/oauth/access_token', headers=headers, data=payload )
+        # access_token = request.form['access_token'] or ''
+        # token_type = request.form['token_type'] or ''
+        # expires_in = request.form['expires_in'] or ''
+        # refresh_token = request.form['refresh_token'] or ''
+        # return {'access_token' : access_token , 'token_type' : token_type, 'expires_in' : expires_in , 'refresh_token' : refresh_token}
+        return r.content
